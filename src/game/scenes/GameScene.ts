@@ -95,7 +95,7 @@ export class GameScene extends Phaser.Scene {
     this.mode = 'menu';
     this.levelIndex = 0;
     this.score = 0;
-    this.prepareLevel('Valitse aloita, kerää kristallit ja vältä mörriköitä.');
+    this.prepareLevel('Valitse aloita, kerää kristallit ja vältä mörriköitä.', 'menu');
     this.drawMenu('Aarrekaivos', 'Aloita seikkailu', 'Paina välilyöntiä tai kosketa tästä aloittaaksesi.');
   }
 
@@ -116,7 +116,7 @@ export class GameScene extends Phaser.Scene {
   private startRun(): void {
     this.levelIndex = 0;
     this.score = 0;
-    this.prepareLevel('Kerää kristallit, avaa portti ja palaa aarteiden kanssa ulos!');
+    this.prepareLevel('Kerää kristallit, avaa portti ja palaa aarteiden kanssa ulos!', 'playing');
   }
 
   private advanceLevel(): void {
@@ -126,14 +126,14 @@ export class GameScene extends Phaser.Scene {
     }
 
     this.levelIndex += 1;
-    this.prepareLevel('Uusi syvempi kenttä alkaa. Vaikeus kasvaa!');
+    this.prepareLevel('Uusi syvempi kenttä alkaa. Vaikeus kasvaa!', 'playing');
   }
 
-  private prepareLevel(message: string): void {
+  private prepareLevel(message: string, mode: GameMode = 'playing'): void {
     const levelConfig = LEVELS[this.levelIndex];
     this.level = parseLevel([...levelConfig.rows], levelConfig.requiredCrystals);
     this.collectedCrystals = 0;
-    this.mode = this.mode === 'menu' ? 'menu' : 'playing';
+    this.mode = mode;
     this.lastMoveAt = 0;
     this.lastGravityAt = 0;
     this.lastEnemyMoveAt = 0;
