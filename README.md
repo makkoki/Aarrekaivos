@@ -38,6 +38,13 @@ npm run build
 
 Valmis staattinen build syntyy `dist/`-kansioon.
 
+
+## GitHub Pages -julkaisu
+
+Peli pitää julkaista Viten tuotantobuildista eli `dist/`-kansiosta. Repositoryn juureen jätetty `index.html` viittaa kehitysaikaiseen `/src/main.ts`-tiedostoon, joten se ei yksinään riitä GitHub Pagesissa.
+
+Tähän projektiin on lisätty GitHub Actions -workflow `.github/workflows/deploy-pages.yml`, joka asentaa riippuvuudet, ajaa `npm run build` -komennon ja julkaisee syntyvän `dist/`-kansion GitHub Pagesiin. Varmista GitHubissa, että repositoryn **Settings → Pages → Source** on **GitHub Actions**.
+
 ## Ohjaus
 
 - Liiku: nuolinäppäimet tai WASD
